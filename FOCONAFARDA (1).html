@@ -1106,7 +1106,7 @@ tbody td:not(:first-child) { text-align: center; }
 .timer-clock.editable:hover {
   text-shadow: 0 0 40px rgba(10,42,102,0.5);
 }
-.timer-clock-input {
+.timer-pomodoro-settings{display:none;width:100%;margin:4px 0 14px;padding:12px 14px;border:1px solid rgba(255,255,255,.16);border-radius:12px;background:rgba(255,255,255,.08);color:#fff}.timer-pomodoro-settings.open{display:block}.timer-pomodoro-settings-title{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:8px}.timer-pomodoro-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}.timer-pomodoro-field label{display:block;font-size:11px;color:rgba(255,255,255,.7);margin-bottom:4px}.timer-pomodoro-field input{width:100%;box-sizing:border-box;padding:8px 9px;border:1px solid rgba(255,255,255,.2);border-radius:8px;background:rgba(0,0,0,.16);color:#fff;font:700 14px Nunito,sans-serif}.timer-pomodoro-help{font-size:11px;color:rgba(255,255,255,.6);margin-top:8px}.timer-clock-input {
   font-size: clamp(72px, 13vw, 120px);
   font-weight: 800; color: white;
   letter-spacing: -4px; line-height: 1;
@@ -3177,16 +3177,16 @@ tbody td:not(:first-child) { text-align: center; }
             <div class="card-title">Estudo Semanal</div>
             <div class="card-nav">
               <button onclick="changeHomeWeek(-1)" title="Semana anterior">&#8249;</button>
-              <span>15/02 &nbsp;~&nbsp; 21/02</span>
+              <span id="weeklyRange">—</span>
               <button onclick="changeHomeWeek(1)" title="Próxima semana">&#8250;</button>
             </div>
           </div>
           <div class="chart-tabs">
-            <button class="chart-tab active" onclick="switchTab(this,'.chart-tab')">TEMPO</button>
-            <button class="chart-tab" onclick="switchTab(this,'.chart-tab')">QUESTÕES</button>
+            <button class="chart-tab active" onclick="switchHomeChart(this,'tempo')">TEMPO</button>
+            <button class="chart-tab" onclick="switchHomeChart(this,'questoes')">QUESTÕES</button>
           </div>
           <canvas id="weeklyChart" height="128"></canvas>
-          <div class="chart-total"><div class="chart-dot"></div>Total Estudado: <span id="weeklyTotal">0h00min</span></div>
+          <div class="chart-total"><div class="chart-dot"></div><span id="weeklyTotalLabel">Total Estudado:</span> <span id="weeklyTotal">0h00min</span></div>
         </div>
       </div>
     </div>
@@ -3215,10 +3215,10 @@ tbody td:not(:first-child) { text-align: center; }
       <div class="section-card">
         <div class="section-title">Tempo de Estudo</div>
         <div class="time-tabs">
-          <button class="time-tab active" onclick="switchTab(this,'.time-tab')">HOJE</button>
-          <button class="time-tab" onclick="switchTab(this,'.time-tab')">SEMANA</button>
-          <button class="time-tab" onclick="switchTab(this,'.time-tab')">MÊS</button>
-          <button class="time-tab" onclick="switchTab(this,'.time-tab')">TOTAL</button>
+          <button class="time-tab active" onclick="switchHomeDonut(this,'hoje')">HOJE</button>
+          <button class="time-tab" onclick="switchHomeDonut(this,'semana')">SEMANA</button>
+          <button class="time-tab" onclick="switchHomeDonut(this,'mes')">MÊS</button>
+          <button class="time-tab" onclick="switchHomeDonut(this,'total')">TOTAL</button>
         </div>
         <div style="display:flex;align-items:center;height:120px;gap:16px;padding:0 4px;">
           <canvas id="donutChart" width="110" height="110"></canvas>
@@ -4067,7 +4067,7 @@ tbody td:not(:first-child) { text-align: center; }
 @media (max-width: 800px) { .disc-results-summary { grid-template-columns:1fr 1fr 1fr; gap:14px; } .disc-results-name { grid-column:1/-1; } .disc-results-progress { max-width:none; } .disc-results-chevron { grid-column:3; grid-row:2; justify-self:end; } .disc-results-stat { text-align:left; } .disc-topic-table { min-width:620px; } .disc-results-details { overflow-x:auto; } }
 
 /* ===== OBSERVAÇÃO ===== */
-.obs-page-subtitle{font-size:13px;color:var(--text-gray);font-weight:600;margin-top:4px}.obs-filter-card,.obs-chart-card,.obs-table-card,.obs-kpi-card{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;box-shadow:var(--card-shadow)}.obs-filter-card{padding:16px 20px;margin-bottom:18px}.obs-filter-title,.obs-card-title,.obs-kpi-label{font-size:10px;font-weight:800;letter-spacing:.75px;color:var(--text-gray);text-transform:uppercase}.obs-filter-title{margin-bottom:12px}.obs-filters{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}.obs-filters label{font-size:11px;font-weight:800;color:var(--text-gray);text-transform:uppercase}.obs-filters select{display:block;width:100%;margin-top:6px;padding:9px 10px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text-dark);font-family:'Nunito';font-weight:700;outline:none}.obs-kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}.obs-kpi-card{padding:16px 18px;border-top:3px solid var(--green)}.obs-kpi-card:nth-child(2){border-top-color:#e2ad2d}.obs-kpi-card:nth-child(3){border-top-color:#6d5bb5}.obs-kpi-label{margin-bottom:8px}.obs-kpi-value{font-size:25px;font-weight:800;color:var(--text-dark)}.obs-kpi-value.danger{color:var(--red)}.obs-kpi-value.warning{color:#d69e2e}.obs-kpi-value.purple{color:#6d5bb5}.obs-kpi-value.green{color:var(--green)}.obs-kpi-sub{font-size:11px;color:var(--text-gray);font-weight:700;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.obs-chart-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:16px;margin-bottom:16px}.obs-chart-wide{grid-column:span 1}.obs-chart-card{padding:18px 20px;min-height:290px}.obs-chart-wrap{height:215px;margin-top:14px}.obs-pie-wrap{height:185px}.obs-legend{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;font-size:11px;color:var(--text-gray);font-weight:700}.obs-legend span{display:inline-flex;align-items:center;gap:5px}.obs-legend i{width:9px;height:9px;border-radius:50%;display:inline-block}.obs-bottom-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:16px;margin-bottom:16px}.obs-tree-sub{font-size:11px;color:var(--text-gray);margin-top:4px}.obs-tree{display:flex;gap:6px;align-items:stretch;height:205px;margin-top:16px;overflow:hidden;border-radius:8px}.obs-tree-item{display:flex;align-items:flex-end;padding:10px;color:#fff;min-width:50px;position:relative;overflow:hidden;transition:transform .16s}.obs-tree-item:hover{transform:translateY(-3px);z-index:2}.obs-tree-item span{font-size:11px;font-weight:800;line-height:1.15;word-break:break-word;text-shadow:0 1px 2px rgba(0,0,0,.25)}.obs-category-summary{display:flex;flex-direction:column;gap:13px;margin-top:18px}.obs-category-row{display:grid;grid-template-columns:78px 1fr 42px;align-items:center;gap:9px;font-size:12px;font-weight:800}.obs-cat-bar{height:8px;background:var(--progress-bg);border-radius:10px;overflow:hidden}.obs-cat-fill{height:100%;border-radius:10px}.obs-table-card{padding:18px 20px;margin-bottom:20px}.obs-table-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.obs-table-count{font-size:11px;color:var(--text-gray);font-weight:700}.obs-table-scroll{overflow-x:auto}.obs-table{width:100%;border-collapse:collapse;font-size:12px}.obs-table th{padding:9px 10px;text-align:center;color:var(--text-gray);font-size:10px;text-transform:uppercase;letter-spacing:.4px;border-bottom:1px solid var(--border);white-space:nowrap}.obs-table th:first-child{text-align:left}.obs-table td{padding:11px 10px;border-bottom:1px solid var(--border);color:var(--text-dark);font-weight:700;text-align:center;white-space:nowrap}.obs-table td:first-child{text-align:left;max-width:250px;overflow:hidden;text-overflow:ellipsis}.obs-table tr:nth-child(even) td{background:var(--table-even)}.obs-table .obs-err{color:var(--red)}.obs-table .obs-ac{color:var(--green)}.obs-priority{display:inline-flex;padding:4px 8px;border-radius:5px;color:#fff;font-size:10px;font-weight:800}.obs-empty{padding:45px 20px;text-align:center;color:var(--text-gray);font-weight:700}.obs-empty strong{display:block;color:var(--text-dark);font-size:16px;margin-bottom:6px}@media(max-width:950px){.obs-kpi-grid{grid-template-columns:repeat(2,1fr)}.obs-chart-grid{grid-template-columns:1fr 1fr}.obs-chart-wide{grid-column:1/-1}.obs-bottom-grid{grid-template-columns:1fr}}@media(max-width:620px){.obs-filters{grid-template-columns:1fr}.obs-kpi-grid{grid-template-columns:1fr 1fr}.obs-chart-grid{grid-template-columns:1fr}.obs-chart-wide{grid-column:auto}}
+.obs-page-subtitle{font-size:13px;color:var(--text-gray);font-weight:600;margin-top:4px}.obs-filter-card,.obs-chart-card,.obs-table-card,.obs-kpi-card{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;box-shadow:var(--card-shadow)}.obs-filter-card{padding:16px 20px;margin-bottom:18px}.obs-filter-title,.obs-card-title,.obs-kpi-label{font-size:10px;font-weight:800;letter-spacing:.75px;color:var(--text-gray);text-transform:uppercase}.obs-filter-title{margin-bottom:12px}.obs-filters{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}.obs-filters label{font-size:11px;font-weight:800;color:var(--text-gray);text-transform:uppercase}.obs-filters select{display:block;width:100%;margin-top:6px;padding:9px 10px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text-dark);font-family:'Nunito';font-weight:700;outline:none}.obs-kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}.obs-kpi-card{padding:16px 18px;border-top:3px solid var(--green)}.obs-kpi-card:nth-child(2){border-top-color:#e2ad2d}.obs-kpi-card:nth-child(3){border-top-color:#6d5bb5}.obs-kpi-label{margin-bottom:8px}.obs-kpi-value{font-size:25px;font-weight:800;color:var(--text-dark)}.obs-kpi-value.danger{color:var(--red)}.obs-kpi-value.warning{color:#d69e2e}.obs-kpi-value.purple{color:#6d5bb5}.obs-kpi-value.green{color:var(--green)}.obs-kpi-sub{font-size:11px;color:var(--text-gray);font-weight:700;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.obs-chart-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:16px;margin-bottom:16px}.obs-chart-wide{grid-column:span 1}.obs-chart-card{padding:18px 20px;min-height:290px}.obs-chart-wrap{height:215px;margin-top:14px;position:relative}.obs-chart-wrap>canvas{display:block!important;width:100%!important;height:100%!important}.obs-pie-wrap{height:185px}.obs-legend{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;font-size:11px;color:var(--text-gray);font-weight:700}.obs-legend span{display:inline-flex;align-items:center;gap:5px}.obs-legend i{width:9px;height:9px;border-radius:50%;display:inline-block}.obs-bottom-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:16px;margin-bottom:16px}.obs-tree-sub{font-size:11px;color:var(--text-gray);margin-top:4px}.obs-tree{display:flex;gap:6px;align-items:stretch;height:205px;margin-top:16px;overflow:hidden;border-radius:8px}.obs-tree-item{display:flex;align-items:flex-end;padding:10px;color:#fff;min-width:50px;position:relative;overflow:hidden;transition:transform .16s}.obs-tree-item:hover{transform:translateY(-3px);z-index:2}.obs-tree-item span{font-size:11px;font-weight:800;line-height:1.15;word-break:break-word;text-shadow:0 1px 2px rgba(0,0,0,.25)}.obs-category-summary{display:flex;flex-direction:column;gap:13px;margin-top:18px}.obs-category-row{display:grid;grid-template-columns:78px 1fr 42px;align-items:center;gap:9px;font-size:12px;font-weight:800}.obs-cat-bar{height:8px;background:var(--progress-bg);border-radius:10px;overflow:hidden}.obs-cat-fill{height:100%;border-radius:10px}.obs-table-card{padding:18px 20px;margin-bottom:20px}.obs-table-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.obs-table-count{font-size:11px;color:var(--text-gray);font-weight:700}.obs-table-scroll{overflow-x:auto}.obs-table{width:100%;border-collapse:collapse;font-size:12px}.obs-table th{padding:9px 10px;text-align:center;color:var(--text-gray);font-size:10px;text-transform:uppercase;letter-spacing:.4px;border-bottom:1px solid var(--border);white-space:nowrap}.obs-table th:first-child{text-align:left}.obs-table td{padding:11px 10px;border-bottom:1px solid var(--border);color:var(--text-dark);font-weight:700;text-align:center;white-space:nowrap}.obs-table td:first-child{text-align:left;max-width:250px;overflow:hidden;text-overflow:ellipsis}.obs-table tr:nth-child(even) td{background:var(--table-even)}.obs-table .obs-err{color:var(--red)}.obs-table .obs-ac{color:var(--green)}.obs-priority{display:inline-flex;padding:4px 8px;border-radius:5px;color:#fff;font-size:10px;font-weight:800}.obs-empty{padding:45px 20px;text-align:center;color:var(--text-gray);font-weight:700}.obs-empty strong{display:block;color:var(--text-dark);font-size:16px;margin-bottom:6px}@media(max-width:950px){.obs-kpi-grid{grid-template-columns:repeat(2,1fr)}.obs-chart-grid{grid-template-columns:1fr 1fr}.obs-chart-wide{grid-column:1/-1}.obs-bottom-grid{grid-template-columns:1fr}}@media(max-width:620px){.obs-filters{grid-template-columns:1fr}.obs-kpi-grid{grid-template-columns:1fr 1fr}.obs-chart-grid{grid-template-columns:1fr}.obs-chart-wide{grid-column:auto}}
 
 /* ===== CADERNO, COMPARAÇÃO E REVISÕES INTELIGENTES ===== */
 .obs-smart-card{background:linear-gradient(135deg,var(--green-light),var(--card-bg));border:1px solid rgba(10,42,102,.35);border-radius:12px;padding:18px 20px;margin-bottom:22px}.obs-smart-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px}.obs-smart-title{font-size:11px;font-weight:800;letter-spacing:.8px;color:var(--green-dark)}.obs-smart-sub{font-size:12px;color:var(--text-gray);font-weight:600;margin-top:4px}.obs-smart-badge{background:var(--green);color:white;padding:5px 10px;border-radius:20px;font-size:11px;font-weight:800;white-space:nowrap}.smart-revision-list{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.smart-revision-item{background:var(--card-bg);border:1px solid var(--border);border-left:4px solid var(--red);border-radius:9px;padding:12px}.smart-revision-name{font-size:13px;font-weight:800;color:var(--text-dark);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.smart-revision-meta{font-size:11px;color:var(--text-gray);font-weight:700;margin:5px 0 10px}.smart-revision-btn{background:var(--green);border:0;color:white;border-radius:6px;padding:6px 10px;font:800 11px Nunito;cursor:pointer}.smart-revision-empty{font-size:12px;color:var(--text-gray);font-weight:700;padding:4px}.error-book-toolbar{display:flex;gap:10px;align-items:center;margin-bottom:16px}.error-book-toolbar select,.comparison-period{padding:9px 12px;border:1px solid var(--border);border-radius:8px;background:var(--card-bg);color:var(--text-dark);font:700 13px Nunito}.error-book-toolbar span{margin-left:auto;color:var(--text-gray);font-size:12px;font-weight:700}.error-book-card{background:var(--card-bg);border:1px solid var(--border);border-left:5px solid var(--red);border-radius:12px;padding:16px 18px;margin-bottom:12px;box-shadow:var(--card-shadow)}.error-book-main{display:grid;grid-template-columns:1fr auto auto;gap:16px;align-items:center}.error-book-title{font-size:14px;font-weight:800;color:var(--text-dark)}.error-book-topic{font-size:12px;color:var(--text-gray);font-weight:600;margin-top:4px}.error-book-comment{background:var(--table-even);border-radius:7px;color:var(--text-gray);font-size:12px;padding:8px 10px;margin-top:12px;line-height:1.4}.error-book-stat{text-align:center}.error-book-stat b{display:block;font-size:18px;color:var(--red)}.error-book-stat span{font-size:10px;color:var(--text-gray);font-weight:800;text-transform:uppercase}.error-book-review{border:1px solid var(--green);background:var(--green-light);color:var(--green-dark);border-radius:7px;padding:8px 11px;font:800 11px Nunito;cursor:pointer}.comparison-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}.comparison-kpi{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:16px 18px;box-shadow:var(--card-shadow)}.comparison-kpi-label{font-size:10px;color:var(--text-gray);font-weight:800;text-transform:uppercase}.comparison-kpi-value{font-size:25px;font-weight:800;color:var(--text-dark);margin-top:7px}.comparison-kpi-change{font-size:11px;font-weight:800;margin-top:3px}.comparison-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}.comparison-grid .obs-chart-card{min-height:290px}@media(max-width:800px){.smart-revision-list,.comparison-grid{grid-template-columns:1fr}.comparison-kpis{grid-template-columns:1fr 1fr}.error-book-main{grid-template-columns:1fr auto}.error-book-review{grid-column:1/-1;justify-self:start}}
@@ -4323,7 +4323,7 @@ tbody td:not(:first-child) { text-align: center; }
         <div class="obs-chart-card"><div class="obs-card-title">ÁRVORE DE PRIORIDADES</div><div class="obs-tree-sub">Tamanho = volume de erros · cor = urgência</div><div id="obsTree" class="obs-tree"></div></div>
         <div class="obs-chart-card"><div class="obs-card-title">RESUMO POR CATEGORIA</div><div id="obsCategorySummary" class="obs-category-summary"></div></div>
       </div>
-      <div class="obs-table-card"><div class="obs-table-head"><div class="obs-card-title">TABELA DE ANÁLISE</div><span id="obsTableCount" class="obs-table-count">0 itens</span></div><div class="obs-table-scroll"><table class="obs-table"><thead><tr><th>Disciplina / Tópico</th><th>Categoria</th><th>Questões</th><th>Acertos</th><th>Erros</th><th>% Erro</th><th>Tempo estudado</th><th>Prioridade</th></tr></thead><tbody id="obsTableBody"></tbody></table></div></div>
+      <div class="obs-table-card"><div class="obs-table-head"><div class="obs-card-title">TABELA DE ANÁLISE</div><span id="obsTableCount" class="obs-table-count">0 itens</span></div><div class="obs-table-scroll"><table class="obs-table"><thead><tr><th>Disciplina / Tópico</th><th>Categoria</th><th>Questões</th><th>Acertos</th><th>Erros</th><th>% Erro</th><th>Tempo estudado</th><th>Tempo em pausa</th><th>Prioridade</th></tr></thead><tbody id="obsTableBody"></tbody></table></div></div>
     </div><!-- /page-observacao -->
 
     <!-- ===== COMPARAÇÃO PAGE ===== -->
@@ -5054,6 +5054,7 @@ tbody td:not(:first-child) { text-align: center; }
     <div class="timer-mode-wrap">
       <button class="timer-mode-btn active" id="modeCrono" onclick="setMode('crono')">CRONÔMETRO</button>
       <button class="timer-mode-btn" id="modeTimer" onclick="setMode('timer')">TIMER</button>
+      <button class="timer-mode-btn" id="modePomodoro" onclick="setMode('pomodoro')">POMODORO</button>
     </div>
 
     <!-- Presets (só no modo timer, antes de iniciar) -->
@@ -5065,6 +5066,15 @@ tbody td:not(:first-child) { text-align: center; }
       <button class="timer-preset-btn" onclick="setPreset(60)">1h</button>
       <button class="timer-preset-btn" onclick="setPreset(90)">1h30</button>
       <button class="timer-preset-btn" onclick="setPreset(120)">2h</button>
+    </div>
+
+    <div class="timer-pomodoro-settings" id="pomodoroSettings">
+      <div class="timer-pomodoro-settings-title">Configurar Pomodoro</div>
+      <div class="timer-pomodoro-fields">
+        <div class="timer-pomodoro-field"><label for="pomodoroStudyMinutes">Tempo de estudo (min)</label><input id="pomodoroStudyMinutes" type="number" min="1" max="180" value="25" onchange="configurePomodoro()"></div>
+        <div class="timer-pomodoro-field"><label for="pomodoroBreakMinutes">Tempo de pausa (min)</label><input id="pomodoroBreakMinutes" type="number" min="1" max="60" value="5" onchange="configurePomodoro()"></div>
+      </div>
+      <div class="timer-pomodoro-help">Ao terminar o foco, a pausa começa automaticamente. Ao terminar a pausa, um novo ciclo de estudo começa.</div>
     </div>
 
     <!-- Clock -->
@@ -5917,8 +5927,10 @@ function saveDB() {
 }
 
 /* ====== EXPORTAR / IMPORTAR DADOS JSON ====== */
-function exportarDadosJSON() {
-  // Coletar todos os dados do sistema
+let focoBackupHandle = null;
+const FOCO_BACKUP_FILENAME = 'FOCO_NA_FARDA_backup.json';
+
+async function exportarDadosJSON() {
   const dados = {
     versao: '1.0',
     exportadoEm: new Date().toISOString(),
@@ -5932,17 +5944,40 @@ function exportarDadosJSON() {
     calEvents: typeof calEvents !== 'undefined' ? calEvents : [],
     histFiltros: typeof histFiltros !== 'undefined' ? histFiltros : {},
   };
-
   const json = JSON.stringify(dados, null, 2);
+
+  // Chrome/Edge permitem manter o mesmo arquivo e sobrescrevê-lo sem criar cópias.
+  if ('showSaveFilePicker' in window) {
+    try {
+      if (!focoBackupHandle) {
+        focoBackupHandle = await window.showSaveFilePicker({
+          suggestedName: FOCO_BACKUP_FILENAME,
+          types: [{ description: 'Backup JSON', accept: { 'application/json': ['.json'] } }]
+        });
+      }
+      const writable = await focoBackupHandle.createWritable();
+      await writable.write(json);
+      await writable.close();
+      showToast('✅ Backup sobrescrito com sucesso: ' + FOCO_BACKUP_FILENAME);
+      return;
+    } catch (err) {
+      if (err && err.name === 'AbortError') return;
+      // Se o handle perdeu a permissão, a alternativa abaixo ainda salva o backup.
+      focoBackupHandle = null;
+    }
+  }
+
+  // Fallback para browsers sem File System Access API: sempre usa o mesmo nome.
   const blob = new Blob([json], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  const dataHoje = new Date().toISOString().slice(0,10);
   a.href = url;
-  a.download = `estudaanimal_backup_${dataHoje}.json`;
+  a.download = FOCO_BACKUP_FILENAME;
+  document.body.appendChild(a);
   a.click();
-  URL.revokeObjectURL(url);
-  showToast('✅ Dados exportados com sucesso!');
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+  showToast('✅ Backup exportado com o nome fixo: ' + FOCO_BACKUP_FILENAME);
 }
 
 function importarDadosJSON() {
@@ -6008,25 +6043,50 @@ function processarImportacaoJSON(input) {
 
 // Formata segundos → "1h23min" ou "45min"
 function fmtTime(seconds) {
-  if (!seconds || seconds <= 0) return '0h00min';
+  seconds = Number(seconds) || 0;
+  if (seconds <= 0) return '0h00min';
   const h = Math.floor(seconds / 3600);
   const m = Math.floor((seconds % 3600) / 60);
-  if (h > 0) return h + 'h' + String(m).padStart(2,'0') + 'min';
+  if (h > 0) return h + 'h' + String(m).padStart(2, '0') + 'min';
   return m + 'min';
 }
 
 // Converte "HH:MM:SS" → segundos
 function parseTimeStr(str) {
-  if (!str) return 0;
-  const p = str.split(':').map(Number);
-  if (p.length === 3) return (p[0]||0)*3600 + (p[1]||0)*60 + (p[2]||0);
-  if (p.length === 2) return (p[0]||0)*3600 + (p[1]||0)*60;
-  return 0;
+  if (str === null || str === undefined || str === '') return 0;
+  if (typeof str === 'number' && Number.isFinite(str)) return Math.max(0, Math.round(str));
+  const value = String(str).trim().toLowerCase();
+  if (!value) return 0;
+
+  // Formatos HH:MM:SS, MM:SS e valores com h/min/s (ex.: 1h30min).
+  const parts = value.split(':').map(Number);
+  if (parts.length === 3 && parts.every(Number.isFinite)) {
+    return Math.max(0, parts[0] * 3600 + parts[1] * 60 + parts[2]);
+  }
+  if (parts.length === 2 && parts.every(Number.isFinite)) {
+    return Math.max(0, parts[0] * 60 + parts[1]);
+  }
+  const unitMatch = value.match(/^(?:(\d+(?:[.,]\d+)?)\s*h)?\s*(?:(\d+(?:[.,]\d+)?)\s*(?:m|min))?\s*(?:(\d+(?:[.,]\d+)?)\s*s)?$/);
+  if (unitMatch && unitMatch.slice(1).some(Boolean)) {
+    const h = Number((unitMatch[1] || '0').replace(',', '.'));
+    const m = Number((unitMatch[2] || '0').replace(',', '.'));
+    const s = Number((unitMatch[3] || '0').replace(',', '.'));
+    return Math.max(0, Math.round(h * 3600 + m * 60 + s));
+  }
+  const numeric = Number(value.replace(',', '.'));
+  return Number.isFinite(numeric) ? Math.max(0, Math.round(numeric)) : 0;
 }
 
-// Data de hoje como "YYYY-MM-DD"
+function sessionTempo(session) {
+  return parseTimeStr(session && session.tempo);
+}
+
+// Data de hoje como "YYYY-MM-DD", no fuso local do aluno.
 function todayStr() {
-  return new Date().toISOString().slice(0,10);
+  const d = new Date();
+  return typeof dateKey === 'function'
+    ? dateKey(d)
+    : d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
 }
 
 // Retorna a data da sessão conforme a aba selecionada
@@ -6037,7 +6097,7 @@ function getRegDate() {
   const d = new Date();
   if (idx === 1) d.setDate(d.getDate() - 1); // ontem
   // Para "OUTRO" usamos hoje por simplicidade (poderia abrir datepicker)
-  return d.toISOString().slice(0,10);
+  return typeof dateKey === 'function' ? dateKey(d) : d.toISOString().slice(0,10);
 }
 
 /* ====== ATUALIZA TODA A INTERFACE ====== */
@@ -6065,7 +6125,7 @@ function refreshHomeStats() {
   const todaySessions = all.filter(s => s.date === today);
 
   // Tempo total hoje
-  const tempoHoje = todaySessions.reduce((acc, s) => acc + (s.tempo || 0), 0);
+  const tempoHoje = todaySessions.reduce((acc, s) => acc + sessionTempo(s), 0);
   const elHT = document.getElementById('homeTempoTotal');
   if (elHT) elHT.textContent = fmtTime(tempoHoje);
 
@@ -6082,27 +6142,18 @@ function refreshHomeStats() {
   const elDes = document.getElementById('homeDesempenho');
   if (elDes) elDes.textContent = pctD + '%';
 
-  // Donut label
-  const elDL = document.getElementById('donutTimeLabel');
-  if (elDL) elDL.textContent = fmtTime(tempoHoje);
-  const elDS = document.getElementById('donutSubLabel');
-  if (elDS) {
-    elDS.innerHTML = tempoHoje > 0
-      ? 'Estudado hoje 🔥'
-      : 'Você ainda não<br>estudou hoje 😔';
-  }
-
   // Meta semanal horas (semana atual)
   const now = new Date();
   const weekStart = new Date(now);
   weekStart.setDate(now.getDate() - now.getDay());
   weekStart.setHours(0,0,0,0);
+  const weekStartKey = dateKey(weekStart);
   const weekTempoSec = all
-    .filter(s => new Date(s.date) >= weekStart)
-    .reduce((a, s) => a + (s.tempo || 0), 0);
+    .filter(s => s.date >= weekStartKey)
+    .reduce((a, s) => a + sessionTempo(s), 0);
   const weekQuestoes = all
-    .filter(s => new Date(s.date) >= weekStart)
-    .reduce((a, s) => a + (s.acertos || 0) + (s.erros || 0), 0);
+    .filter(s => s.date >= weekStartKey)
+    .reduce((a, s) => a + (Number(s.acertos) || 0) + (Number(s.erros) || 0), 0);
 
   const metaHorasTarget = 35 * 3600; // meta: 35h/semana
   const metaQuestoesTarget = 100;     // meta: 100 questões/semana
@@ -6120,139 +6171,171 @@ function refreshHomeStats() {
 
 /* ---- Constância ---- */
 let constanciaOffset = 0; // 0 = período atual, -1 = anterior, etc.
+let homeWeekOffset = 0;
+let homeChartMode = 'tempo';
+let homeDonutMode = 'hoje';
 const CONSTANCIA_DAYS = 30; // quantos dias mostrar por página
 
 function constanciaNav(dir) {
-  constanciaOffset += dir;
-  // Não permite ir para o futuro
-  if (constanciaOffset > 0) constanciaOffset = 0;
+  const dates = activeSessions().map(s => s.date).filter(Boolean).sort();
+  if (!dates.length) { constanciaOffset = 0; refreshConstancia(); return; }
+  const first = new Date(dates[0] + 'T12:00:00');
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  const diffDays = Math.floor((first - today) / 86400000);
+  const earliestOffset = Math.min(0, Math.ceil(diffDays / CONSTANCIA_DAYS));
+  constanciaOffset = Math.max(earliestOffset, Math.min(0, constanciaOffset + dir));
   refreshConstancia();
 }
 
 function refreshConstancia() {
-  const datesWithStudy = new Set(activeSessions().map(s => s.date));
+  const datesWithStudy = new Set(activeSessions().map(s => s.date).filter(Boolean));
+  const sortedDates = [...datesWithStudy].sort();
 
-  // Calcular streak atual (dias consecutivos até hoje)
+  // Calcular streak atual (dias consecutivos até hoje), usando o calendário local.
   let streak = 0;
   const check = new Date();
-  while (true) {
-    const ds = check.toISOString().slice(0, 10);
-    if (!datesWithStudy.has(ds)) break;
+  check.setHours(0, 0, 0, 0);
+  while (datesWithStudy.has(dateKey(check))) {
     streak++;
     check.setDate(check.getDate() - 1);
   }
-
   const elStreak = document.getElementById('streakCount');
-  if (elStreak) {
-    if (streak === 0) elStreak.textContent = '0 dias';
-    else if (streak === 1) elStreak.textContent = '1 dia';
-    else elStreak.textContent = streak + ' dias';
-  }
+  if (elStreak) elStreak.textContent = streak === 1 ? '1 dia' : streak + ' dias';
 
-  // Definir janela de datas baseada no offset
-  // Offset 0 = os últimos CONSTANCIA_DAYS dias até hoje
-  // Offset -1 = os CONSTANCIA_DAYS dias anteriores, etc.
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-
-  // Fim da janela
-  const windowEnd = new Date(today);
-  windowEnd.setDate(today.getDate() + constanciaOffset * CONSTANCIA_DAYS);
-
-  // Início da janela
-  const windowStart = new Date(windowEnd);
-  windowStart.setDate(windowEnd.getDate() - (CONSTANCIA_DAYS - 1));
-
-  // Atualiza label do range
-  const fmtDate = d => {
-    const dd = String(d.getDate()).padStart(2, '0');
-    const mm = String(d.getMonth() + 1).padStart(2, '0');
-    return dd + '/' + mm;
-  };
-  const elRange = document.getElementById('constanciaRange');
-  if (elRange) elRange.textContent = fmtDate(windowStart) + ' ~ ' + fmtDate(windowEnd);
-
-  // Preencher grade
   const grid = document.getElementById('daysGrid');
+  const elRange = document.getElementById('constanciaRange');
   if (!grid) return;
   grid.innerHTML = '';
+  if (!sortedDates.length) {
+    if (elRange) elRange.textContent = '—';
+    return;
+  }
 
-  for (let i = 0; i < CONSTANCIA_DAYS; i++) {
-    const day = new Date(windowStart);
-    day.setDate(windowStart.getDate() + i);
-    day.setHours(0, 0, 0, 0);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const firstStudy = new Date(sortedDates[0] + 'T12:00:00');
+  firstStudy.setHours(0, 0, 0, 0);
+  const windowEnd = new Date(today);
+  windowEnd.setDate(today.getDate() + constanciaOffset * CONSTANCIA_DAYS);
+  if (windowEnd < firstStudy) {
+    if (elRange) elRange.textContent = '—';
+    return;
+  }
+  const windowStart = new Date(windowEnd);
+  windowStart.setDate(windowEnd.getDate() - (CONSTANCIA_DAYS - 1));
+  if (windowStart < firstStudy) windowStart.setTime(firstStudy.getTime());
 
-    const ds = day.toISOString().slice(0, 10);
-    const isToday = day.getTime() === today.getTime();
-    const isFuture = day > today;
+  const fmtDate = d => String(d.getDate()).padStart(2, '0') + '/' + String(d.getMonth() + 1).padStart(2, '0');
+  if (elRange) elRange.textContent = fmtDate(windowStart) + ' ~ ' + fmtDate(windowEnd);
+
+  for (let day = new Date(windowStart); day <= windowEnd; day.setDate(day.getDate() + 1)) {
+    const current = new Date(day);
+    current.setHours(0, 0, 0, 0);
+    const ds = dateKey(current);
+    const isToday = current.getTime() === today.getTime();
     const studied = datesWithStudy.has(ds);
-
     const cell = document.createElement('div');
-    const dayNum = day.getDate();
-
-    // Tooltip com data completa
     const months = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
-    cell.title = dayNum + ' ' + months[day.getMonth()];
-
-    if (isFuture) {
-      cell.className = 'day-cell future';
-      cell.textContent = '·';
-    } else if (studied) {
-      cell.className = 'day-cell studied' + (isToday ? ' today-marker' : '');
-      // Ícone ✓ igual à referência
-      cell.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>`;
-    } else {
-      // Dia passado sem estudo
-      cell.className = 'day-cell missed' + (isToday ? ' today-marker' : '');
-      // Ícone ✗ igual à referência
-      cell.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`;
-    }
-
+    cell.title = current.getDate() + ' ' + months[current.getMonth()];
+    cell.className = 'day-cell ' + (studied ? 'studied' : 'missed') + (isToday ? ' today-marker' : '');
+    cell.innerHTML = studied
+      ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>'
+      : '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
     grid.appendChild(cell);
   }
 }
 
 /* ---- Gráfico semanal (barras) ---- */
+function getHomeWeekBounds(offset = 0) {
+  const base = new Date();
+  base.setHours(0, 0, 0, 0);
+  base.setDate(base.getDate() + offset * 7);
+  const start = new Date(base);
+  start.setDate(base.getDate() - base.getDay());
+  const end = new Date(start);
+  end.setDate(start.getDate() + 6);
+  return { start, end };
+}
+
 function refreshWeeklyChart() {
   const labels = ['DOM','SEG','TER','QUA','QUI','SEX','SAB'];
-  const data = [0,0,0,0,0,0,0];
-  const now = new Date();
-  const weekStart = new Date(now);
-  weekStart.setDate(now.getDate() - now.getDay());
-  weekStart.setHours(0,0,0,0);
+  const data = [0, 0, 0, 0, 0, 0, 0];
+  const { start, end } = getHomeWeekBounds(homeWeekOffset);
+  const startKey = dateKey(start), endKey = dateKey(end);
+  const isQuestions = homeChartMode === 'questoes';
 
   activeSessions().forEach(s => {
+    if (s.date < startKey || s.date > endKey) return;
     const d = new Date(s.date + 'T12:00:00');
-    if (d >= weekStart) {
-      const dow = d.getDay();
-      data[dow] += (s.tempo || 0) / 3600;
-    }
+    const value = isQuestions
+      ? (Number(s.acertos) || 0) + (Number(s.erros) || 0)
+      : sessionTempo(s) / 3600;
+    data[d.getDay()] += value;
   });
+
+  const range = document.getElementById('weeklyRange');
+  if (range) range.textContent = start.toLocaleDateString('pt-BR', {day:'2-digit', month:'2-digit'}) + ' ~ ' + end.toLocaleDateString('pt-BR', {day:'2-digit', month:'2-digit'});
+  const totalLabel = document.getElementById('weeklyTotalLabel');
+  if (totalLabel) totalLabel.textContent = isQuestions ? 'Total de Questões:' : 'Total Estudado:';
 
   const maxVal = Math.max(...data, 1);
   if (weeklyChart) {
     weeklyChart.data.datasets[0].data = data;
+    weeklyChart.data.datasets[0].label = isQuestions ? 'Questões' : 'Horas';
     weeklyChart.options.scales.y.max = Math.ceil(maxVal * 1.2) || 2;
+    weeklyChart.options.scales.y.ticks.stepSize = isQuestions ? 1 : undefined;
     weeklyChart.update();
   }
 
-  const totalSec = data.reduce((a,b) => a+b, 0) * 3600;
   const elWT = document.getElementById('weeklyTotal');
-  if (elWT) elWT.textContent = fmtTime(totalSec);
+  if (elWT) elWT.textContent = isQuestions
+    ? String(Math.round(data.reduce((a, b) => a + b, 0)))
+    : fmtTime(data.reduce((a, b) => a + b, 0) * 3600);
 }
 
 /* ---- Donut chart (tempo hoje vs meta) ---- */
+function getHomeDonutSessions() {
+  const all = activeSessions();
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  if (homeDonutMode === 'total') return all;
+  if (homeDonutMode === 'mes') {
+    return all.filter(s => {
+      const d = new Date((s.date || '') + 'T12:00:00');
+      return d.getFullYear() === today.getFullYear() && d.getMonth() === today.getMonth();
+    });
+  }
+  const weekStart = getWeekStart(today);
+  const todayKey = dateKey(today);
+  const weekStartKey = dateKey(weekStart);
+  if (homeDonutMode === 'semana') return all.filter(s => s.date >= weekStartKey && s.date <= todayKey);
+  return all.filter(s => s.date === todayKey);
+}
+
+function switchHomeDonut(el, mode) {
+  const tabs = el.closest('.time-tabs');
+  if (tabs) tabs.querySelectorAll('.time-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  homeDonutMode = mode;
+  refreshDonutChart();
+}
+
 function refreshDonutChart() {
-  const today = todayStr();
-  const todayTempoSec = activeSessions()
-    .filter(s => s.date === today)
-    .reduce((a, s) => a + (s.tempo || 0), 0);
-  const metaSec = 4 * 3600; // meta: 4h/dia
-  const pct = Math.min(100, todayTempoSec / metaSec * 100);
+  const sessions = getHomeDonutSessions();
+  const totalSec = sessions.reduce((a, s) => a + sessionTempo(s), 0);
+  const goals = { hoje: 4 * 3600, semana: 35 * 3600, mes: 140 * 3600 };
+  const metaSec = homeDonutMode === 'total' ? Math.max(totalSec, 1) : goals[homeDonutMode];
+  const pct = Math.min(100, totalSec / metaSec * 100);
   if (donutChart) {
-    donutChart.data.datasets[0].data = [pct, 100 - pct];
+    donutChart.data.datasets[0].data = [pct, Math.max(0, 100 - pct)];
     donutChart.update();
   }
+  const labels = { hoje: 'hoje', semana: 'nesta semana', mes: 'neste mês', total: 'em todo o período' };
+  const elDL = document.getElementById('donutTimeLabel');
+  if (elDL) elDL.textContent = fmtTime(totalSec);
+  const elDS = document.getElementById('donutSubLabel');
+  if (elDS) elDS.innerHTML = totalSec > 0
+    ? 'Estudado ' + labels[homeDonutMode] + ' 🔥'
+    : 'Você ainda não<br>estudou ' + labels[homeDonutMode];
 }
 
 /* ---- Tabela de disciplinas (painel home) ---- */
@@ -6266,9 +6349,9 @@ function refreshDisciplineTable() {
   activeSessions().forEach(s => {
     const key = s.disciplina || 'Sem disciplina';
     if (!byDisc[key]) byDisc[key] = { tempo: 0, acertos: 0, erros: 0, topicos: new Set() };
-    byDisc[key].tempo += s.tempo || 0;
-    byDisc[key].acertos += s.acertos || 0;
-    byDisc[key].erros += s.erros || 0;
+    byDisc[key].tempo += sessionTempo(s);
+    byDisc[key].acertos += Number(s.acertos) || 0;
+    byDisc[key].erros += Number(s.erros) || 0;
     if (s.topico) byDisc[key].topicos.add(s.topico);
   });
 
@@ -6844,6 +6927,9 @@ function saveRegistroOriginal() {
     erros,
     pagIni,
     pagFim,
+    tempoPausa: pendingTimerMeta ? Number(pendingTimerMeta.tempoPausa) || 0 : 0,
+    pomodoroCiclos: pendingTimerMeta ? Number(pendingTimerMeta.pomodoroCiclos) || 0 : 0,
+    modoCronometro: pendingTimerMeta ? pendingTimerMeta.modo : null,
     teoriaFinalizada: document.querySelectorAll('.reg-check-row .reg-checkbox.checked')[0] ? true : false,
     programarRevisoes: document.querySelectorAll('.reg-check-row .reg-checkbox.checked')[1] ? true : false,
   };
@@ -6862,6 +6948,7 @@ function saveRegistroOriginal() {
   const saveNew = document.getElementById('saveNewCheck')?.classList.contains('checked');
 
   closeRegistro();
+  pendingTimerMeta = null;
   try { refreshAllDashboard(); } catch (err) { console.error('Falha ao atualizar dashboard após salvar:', err); }
   // Atualizar revisões se a página estiver visível
   if (document.getElementById('revListProg')) { try { renderTodasRevisoes(); } catch (err) { console.error('Falha ao atualizar revisões:', err); } }
@@ -6963,7 +7050,11 @@ function toggleDark() {
   document.getElementById('moonIcon').style.display = dark ? 'block' : 'none';
   document.getElementById('sunIcon').style.display = dark ? 'none' : 'block';
   // Rebuild charts after transition completes
-  setTimeout(() => buildCharts(), 320);
+  setTimeout(() => {
+    buildCharts();
+    if (document.getElementById('page-observacao')?.classList.contains('active')) refreshObservacao();
+    if (document.getElementById('page-comparacao')?.classList.contains('active')) renderComparison();
+  }, 320);
   // Flash the topbar icon
   const btn = document.getElementById('darkBtn');
   if (btn) {
@@ -7000,6 +7091,14 @@ function handleOverlay(e) { if (e.target === document.getElementById('modalOverl
 function switchTab(el, selector) {
   el.closest('.side-card, .section-card').querySelectorAll(selector).forEach(t => t.classList.remove('active'));
   el.classList.add('active');
+}
+
+function switchHomeChart(el, mode) {
+  const card = el.closest('.side-card');
+  if (card) card.querySelectorAll('.chart-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  homeChartMode = mode;
+  refreshWeeklyChart();
 }
 
 /* --- MODAL NAV --- */
@@ -7226,6 +7325,7 @@ function openRegistroModal(elapsed) {
 }
 function closeRegistro() {
   document.getElementById('registroOverlay').classList.remove('open');
+  pendingTimerMeta = null;
 }
 function handleRegistroOverlay(e) {
   if (e.target === document.getElementById('registroOverlay')) closeRegistro();
@@ -7253,10 +7353,20 @@ document.addEventListener('DOMContentLoaded', () => {
    TIMER — Cronômetro + Countdown
    ===================================================================== */
 let timerInterval  = null;
-let timerSeconds   = 0;      // segundos acumulados (crono) ou decorridos (timer)
+let timerPauseInterval = null;
+let timerSeconds   = 0;      // segundos da fase atual
+let timerPauseSeconds = 0;   // pausas manuais fora do Pomodoro
+let timerPauseStartedAt = null;
 let timerRunning   = false;
 let timerMode      = 'crono';
-let timerCountdownFrom = 30 * 60;  // padrão 30 min
+let timerCountdownFrom = 30 * 60;
+let pomodoroPhase = 'study';
+let pomodoroStudyTotal = 25 * 60;
+let pomodoroBreakTotal = 5 * 60;
+let pomodoroStudyAccumulated = 0;
+let pomodoroBreakAccumulated = 0;
+let pomodoroCycles = 0;
+let pendingTimerMeta = null;
 
 function openTimer() {
   document.getElementById('timerOverlay').classList.add('open');
@@ -7266,225 +7376,146 @@ function closeTimer() {
   document.getElementById('timerOverlay').classList.remove('open');
 }
 
-/* ---- Modo (cronômetro / timer) ---- */
+function resetTimerState() {
+  clearInterval(timerInterval); clearInterval(timerPauseInterval);
+  timerInterval = null; timerPauseInterval = null;
+  timerSeconds = 0; timerPauseSeconds = 0; timerPauseStartedAt = null;
+  timerRunning = false; pomodoroPhase = 'study'; pomodoroStudyAccumulated = 0; pomodoroBreakAccumulated = 0; pomodoroCycles = 0;
+}
+
 function setMode(mode) {
   if (timerRunning) return;
+  resetTimerState();
   timerMode = mode;
-  timerSeconds = 0;
+  if (mode === 'pomodoro') configurePomodoro();
   document.getElementById('modeCrono').classList.toggle('active', mode === 'crono');
   document.getElementById('modeTimer').classList.toggle('active', mode === 'timer');
+  document.getElementById('modePomodoro').classList.toggle('active', mode === 'pomodoro');
   renderTimerUI();
 }
 
-/* ---- Presets de tempo ---- */
+function configurePomodoro() {
+  if (timerRunning) return;
+  const study = Math.min(180, Math.max(1, Number(document.getElementById('pomodoroStudyMinutes')?.value) || 25));
+  const pause = Math.min(60, Math.max(1, Number(document.getElementById('pomodoroBreakMinutes')?.value) || 5));
+  document.getElementById('pomodoroStudyMinutes').value = study;
+  document.getElementById('pomodoroBreakMinutes').value = pause;
+  pomodoroStudyTotal = study * 60; pomodoroBreakTotal = pause * 60;
+  pomodoroPhase = 'study'; timerSeconds = 0;
+  renderTimerUI();
+}
+
 function setPreset(minutes) {
   if (timerRunning) return;
-  timerCountdownFrom = minutes * 60;
-  timerSeconds = 0;
-  // marca botão ativo
+  timerCountdownFrom = minutes * 60; timerSeconds = 0;
   document.querySelectorAll('.timer-preset-btn').forEach(b => b.classList.remove('active'));
-  event.currentTarget.classList.add('active');
+  if (event?.currentTarget) event.currentTarget.classList.add('active');
   renderTimerUI();
 }
 
-/* ---- Clique no relógio → editar tempo (só modo timer parado) ---- */
 function onClockClick() {
   if (timerMode !== 'timer' || timerRunning) return;
-  const display = document.getElementById('timerDisplay');
-  const input   = document.getElementById('timerClockInput');
-  const hint    = document.getElementById('timerHint');
-
+  const display = document.getElementById('timerDisplay'), input = document.getElementById('timerClockInput'), hint = document.getElementById('timerHint');
   const secs = timerCountdownFrom - timerSeconds;
-  const h = Math.floor(secs / 3600);
-  const m = Math.floor((secs % 3600) / 60);
-  const s = secs % 60;
-  input.value = h > 0 ? `${pad(h)}:${pad(m)}:${pad(s)}` : `${pad(m)}:${pad(s)}`;
-
-  display.style.display = 'none';
-  input.style.display   = 'block';
-  hint.textContent      = 'Digite MM:SS ou HH:MM:SS — Enter para confirmar';
-  input.focus();
-  input.select();
+  input.value = `${pad(Math.floor(secs/3600))}:${pad(Math.floor(secs%3600/60))}:${pad(secs%60)}`;
+  display.style.display = 'none'; input.style.display = 'block'; hint.textContent = 'Digite MM:SS ou HH:MM:SS — Enter para confirmar'; input.focus(); input.select();
 }
-
 function commitClockInput() {
-  const display = document.getElementById('timerDisplay');
-  const input   = document.getElementById('timerClockInput');
-  const hint    = document.getElementById('timerHint');
-
-  const val = input.value.trim();
-  const parts = val.split(':').map(Number);
-  let secs = 0;
-  if (parts.length === 3) secs = parts[0]*3600 + parts[1]*60 + parts[2];
-  else if (parts.length === 2) secs = parts[0]*60 + parts[1];
-  else secs = parseInt(val) * 60 || 0;
-
-  if (secs > 0) {
-    timerCountdownFrom = secs;
-    timerSeconds = 0;
-    // limpa preset ativo (valor customizado)
-    document.querySelectorAll('.timer-preset-btn').forEach(b => b.classList.remove('active'));
-  }
-  display.style.display = 'block';
-  input.style.display   = 'none';
-  hint.textContent      = '';
-  renderTimerUI();
+  const display = document.getElementById('timerDisplay'), input = document.getElementById('timerClockInput'), hint = document.getElementById('timerHint');
+  const parts = input.value.trim().split(':').map(Number);
+  const secs = parts.length === 3 ? parts[0]*3600+parts[1]*60+parts[2] : parts.length === 2 ? parts[0]*60+parts[1] : (parseInt(input.value)||0)*60;
+  if (secs > 0) { timerCountdownFrom = secs; timerSeconds = 0; document.querySelectorAll('.timer-preset-btn').forEach(b => b.classList.remove('active')); }
+  display.style.display = 'block'; input.style.display = 'none'; hint.textContent = ''; renderTimerUI();
 }
-
-/* ---- Render principal ---- */
-function pad(n) { return String(n).padStart(2, '0'); }
-
+function pad(n) { return String(Math.max(0, Math.floor(n))).padStart(2, '0'); }
+function getStudyElapsed() {
+  if (timerMode === 'pomodoro') return pomodoroStudyAccumulated + (pomodoroPhase === 'study' ? timerSeconds : 0);
+  return timerSeconds;
+}
+function getPauseElapsed() {
+  const currentBreak = timerMode === 'pomodoro' && pomodoroPhase === 'break' ? timerSeconds : 0;
+  return timerPauseSeconds + pomodoroBreakAccumulated + currentBreak;
+}
+function pauseLabel() {
+  const value = timerMode === 'pomodoro' && pomodoroPhase === 'break' ? timerSeconds : timerPauseSeconds;
+  return value > 0 ? `Pausa contabilizada: ${fmtTime(value)}` : '';
+}
 function renderTimerUI() {
-  const display  = document.getElementById('timerDisplay');
-  const fill     = document.getElementById('timerProgressFill');
-  const presets  = document.getElementById('timerPresets');
-  const hint     = document.getElementById('timerHint');
-  const stopBtn  = document.getElementById('timerStopBtn');
-
-  let secs;
-  if (timerMode === 'crono') {
-    secs = timerSeconds;
-    fill.style.width = '100%';
-    // cronômetro: barra pulsa sempre cheia
-  } else {
-    secs = Math.max(0, timerCountdownFrom - timerSeconds);
-    const pct = timerCountdownFrom > 0
-      ? Math.max(0, (timerCountdownFrom - timerSeconds) / timerCountdownFrom * 100)
-      : 0;
-    fill.style.width = pct + '%';
-  }
-
-  const h = Math.floor(secs / 3600);
-  const m = Math.floor((secs % 3600) / 60);
-  const s = secs % 60;
-  display.textContent = `${pad(h)}:${pad(m)}:${pad(s)}`;
-
-  // Mostrar/esconder presets e hint de edição
-  if (timerMode === 'timer' && !timerRunning) {
-    presets.style.display = 'flex';
-    display.classList.add('editable');
-    display.onclick = onClockClick;
-    if (!hint.textContent) hint.textContent = 'Toque no tempo para personalizar';
-  } else {
-    presets.style.display = 'none';
-    display.classList.remove('editable');
-    display.onclick = null;
-    hint.textContent = '';
-  }
-
-  // Cor do display: vermelho nos últimos 10% do timer
-  if (timerMode === 'timer' && timerRunning) {
-    const remaining = timerCountdownFrom - timerSeconds;
-    display.style.color = remaining <= timerCountdownFrom * 0.1 && remaining > 0
-      ? '#ef4444'
-      : 'white';
-  } else {
-    display.style.color = 'white';
-  }
+  const display = document.getElementById('timerDisplay'), fill = document.getElementById('timerProgressFill'), presets = document.getElementById('timerPresets'), hint = document.getElementById('timerHint'), stopBtn = document.getElementById('timerStopBtn'), settings = document.getElementById('pomodoroSettings');
+  if (!display) return;
+  const target = timerMode === 'pomodoro' ? (pomodoroPhase === 'study' ? pomodoroStudyTotal : pomodoroBreakTotal) : timerCountdownFrom;
+  const secs = timerMode === 'crono' ? timerSeconds : Math.max(0, target - timerSeconds);
+  fill.style.width = timerMode === 'crono' ? '100%' : (target > 0 ? Math.max(0, (target - timerSeconds) / target * 100) : 0) + '%';
+  display.textContent = `${pad(Math.floor(secs/3600))}:${pad(Math.floor(secs%3600/60))}:${pad(secs%60)}`;
+  settings.classList.toggle('open', timerMode === 'pomodoro' && !timerRunning);
+  presets.style.display = timerMode === 'timer' && !timerRunning ? 'flex' : 'none';
+  display.classList.toggle('editable', timerMode === 'timer' && !timerRunning); display.onclick = timerMode === 'timer' && !timerRunning ? onClockClick : null;
+  if (timerMode === 'pomodoro') hint.textContent = (pomodoroPhase === 'study' ? 'FOCO' : 'PAUSA') + (timerRunning ? ' · ' + (pomodoroCycles + 1) + 'º ciclo' : '') + (pauseLabel() ? ' · ' + pauseLabel() : '');
+  else hint.textContent = timerRunning ? '' : (timerPauseSeconds > 0 ? pauseLabel() : (timerMode === 'timer' ? 'Toque no tempo para personalizar' : ''));
+  display.style.color = timerMode !== 'crono' && timerRunning && secs <= target * .1 && secs > 0 ? '#ef4444' : 'white';
+  stopBtn.style.display = timerRunning || getStudyElapsed() > 0 || getPauseElapsed() > 0 ? 'flex' : 'none';
 }
-
-/* ---- Play / Pause ---- */
+function commitManualPause() {
+  if (timerPauseStartedAt) {
+    timerPauseSeconds += Math.max(0, Math.floor((Date.now() - timerPauseStartedAt) / 1000));
+    timerPauseStartedAt = null;
+  }
+  clearInterval(timerPauseInterval); timerPauseInterval = null;
+}
+function beginManualPauseClock() {
+  timerPauseStartedAt = Date.now();
+  clearInterval(timerPauseInterval);
+  timerPauseInterval = setInterval(renderTimerUI, 1000);
+}
 function toggleTimer() {
-  const stopBtn   = document.getElementById('timerStopBtn');
-  const playIcon  = document.getElementById('playIcon');
-  const pauseIcon = document.getElementById('pauseIcon');
-  const hint      = document.getElementById('timerHint');
-
+  const stopBtn = document.getElementById('timerStopBtn'), playIcon = document.getElementById('playIcon'), pauseIcon = document.getElementById('pauseIcon');
   if (timerRunning) {
-    // PAUSAR
-    clearInterval(timerInterval);
-    timerInterval = null;
-    timerRunning  = false;
-    playIcon.style.display  = 'block';
-    pauseIcon.style.display = 'none';
-    hint.textContent = timerMode === 'timer' ? 'Toque no tempo para personalizar' : '';
-    // mantém botão PARAR E SALVAR visível para o usuário poder salvar
-  } else {
-    // INICIAR / RETOMAR
-    // Validação: timer precisa ter tempo configurado
-    if (timerMode === 'timer' && timerCountdownFrom <= 0) return;
-
-    timerRunning = true;
-    playIcon.style.display  = 'none';
-    pauseIcon.style.display = 'block';
-    stopBtn.style.display   = 'flex';
-    hint.textContent = '';
-
-    // Esconde presets durante a contagem
-    document.getElementById('timerPresets').style.display = 'none';
-
-    timerInterval = setInterval(() => {
-      timerSeconds++;
-      if (timerMode === 'timer' && timerSeconds >= timerCountdownFrom) {
-        timerSeconds = timerCountdownFrom;
-        renderTimerUI();
-        timerFinished();
-        return;
-      }
-      renderTimerUI();
-    }, 1000);
+    clearInterval(timerInterval); timerInterval = null; timerRunning = false;
+    if (timerMode !== 'pomodoro') beginManualPauseClock();
+    playIcon.style.display = 'block'; pauseIcon.style.display = 'none'; renderTimerUI(); return;
   }
-}
-
-/* ---- Timer chegou a zero naturalmente ---- */
-function timerFinished() {
-  clearInterval(timerInterval);
-  timerInterval = null;
-  timerRunning  = false;
-  document.getElementById('playIcon').style.display  = 'block';
-  document.getElementById('pauseIcon').style.display = 'none';
-
-  // Vibração se suportado
-  if (navigator.vibrate) navigator.vibrate([300, 100, 300]);
-
-  // Som de notificação simples
-  try {
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
-    [880, 1100, 1320].forEach((freq, i) => {
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.connect(gain); gain.connect(ctx.destination);
-      osc.frequency.value = freq;
-      osc.type = 'sine';
-      gain.gain.setValueAtTime(0.18, ctx.currentTime + i * 0.25);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + i * 0.25 + 0.4);
-      osc.start(ctx.currentTime + i * 0.25);
-      osc.stop(ctx.currentTime + i * 0.25 + 0.4);
-    });
-  } catch(e) {}
-
-  // Abre registro com o tempo exato do countdown
-  const elapsed = timerCountdownFrom;
-  setTimeout(() => {
-    closeTimer();
-    timerSeconds = 0;
+  commitManualPause();
+  if (timerMode === 'timer' && timerCountdownFrom <= 0) return;
+  if (timerMode === 'pomodoro') {
+    const study = Math.min(180, Math.max(1, Number(document.getElementById('pomodoroStudyMinutes')?.value) || 25));
+    const pause = Math.min(60, Math.max(1, Number(document.getElementById('pomodoroBreakMinutes')?.value) || 5));
+    pomodoroStudyTotal = study * 60; pomodoroBreakTotal = pause * 60;
+  }
+  timerRunning = true; playIcon.style.display = 'none'; pauseIcon.style.display = 'block'; stopBtn.style.display = 'flex';
+  timerInterval = setInterval(() => {
+    timerSeconds++;
+    const target = timerMode === 'pomodoro' ? (pomodoroPhase === 'study' ? pomodoroStudyTotal : pomodoroBreakTotal) : timerCountdownFrom;
+    if (timerMode === 'timer' && timerSeconds >= target) { timerSeconds = target; renderTimerUI(); timerFinished(); return; }
+    if (timerMode === 'pomodoro' && timerSeconds >= target) { timerSeconds = target; renderTimerUI(); pomodoroPhaseFinished(); return; }
     renderTimerUI();
-    document.getElementById('timerStopBtn').style.display = 'none';
-    openRegistro(elapsed);
-  }, 600);
-}
-
-/* ---- Parar e Salvar (manual) ---- */
-function stopTimer() {
-  // Calcula o tempo real estudado
-  const elapsed = timerMode === 'crono'
-    ? timerSeconds                          // cronômetro: tempo acumulado
-    : timerSeconds;                         // timer: segundos já decorridos
-
-  clearInterval(timerInterval);
-  timerInterval = null;
-  timerRunning  = false;
-  timerSeconds  = 0;
-
-  document.getElementById('playIcon').style.display  = 'block';
-  document.getElementById('pauseIcon').style.display = 'none';
-  document.getElementById('timerStopBtn').style.display = 'none';
+  }, 1000);
   renderTimerUI();
-
-  if (elapsed > 0) {
-    closeTimer();
-    openRegistro(elapsed);
+}
+function pomodoroPhaseFinished() {
+  if (pomodoroPhase === 'study') {
+    pomodoroStudyAccumulated += pomodoroStudyTotal; pomodoroPhase = 'break'; timerSeconds = 0;
+    showToast('☕ Foco concluído. A pausa do Pomodoro começou.');
+  } else {
+    pomodoroBreakAccumulated += pomodoroBreakTotal; pomodoroCycles++; pomodoroPhase = 'study'; timerSeconds = 0;
+    showToast('🎯 Pausa concluída. Novo ciclo de estudo iniciado.');
   }
+  if (navigator.vibrate) navigator.vibrate([250,100,250]); renderTimerUI();
+}
+function timerFinished() {
+  clearInterval(timerInterval); timerInterval = null; timerRunning = false;
+  document.getElementById('playIcon').style.display = 'block'; document.getElementById('pauseIcon').style.display = 'none';
+  if (navigator.vibrate) navigator.vibrate([300,100,300]);
+  const elapsed = getStudyElapsed();
+  pendingTimerMeta = {tempoPausa: getPauseElapsed(), pomodoroCiclos: 0, modo: timerMode};
+  setTimeout(() => { closeTimer(); timerSeconds = 0; renderTimerUI(); openRegistro(elapsed); }, 500);
+}
+function stopTimer() {
+  commitManualPause(); clearInterval(timerInterval); timerInterval = null; timerRunning = false;
+  const elapsed = getStudyElapsed(), pauseElapsed = getPauseElapsed(), cycles = pomodoroCycles;
+  document.getElementById('playIcon').style.display = 'block'; document.getElementById('pauseIcon').style.display = 'none';
+  pendingTimerMeta = {tempoPausa: pauseElapsed, pomodoroCiclos: cycles, modo: timerMode};
+  resetTimerState(); renderTimerUI();
+  if (elapsed > 0) { closeTimer(); openRegistro(elapsed); }
 }
 
 // Init
@@ -11832,7 +11863,7 @@ function renderDisciplinasPage() {
 function toggleDisciplinaResult(card) { card.classList.toggle('open'); }
 
 /* ===== OBSERVAÇÃO — ANÁLISE DE ERROS E FALHAS ===== */
-let obsLineChart=null, obsBarChart=null, obsPieChart=null;
+var obsLineChart=null, obsBarChart=null, obsPieChart=null;
 function obsChartColors(){const dark=document.documentElement.getAttribute('data-theme')==='dark';return {text:dark?'#94a3b8':'#718096',grid:dark?'#2d3748':'#edf0f4'};}
 function obsGroupData(){
   const days=Number(document.getElementById('obsPeriod')?.value||'0'); const disc=document.getElementById('obsDisc')?.value||'all'; const focus=document.getElementById('obsFocus')?.value||'all'; const now=new Date(); now.setHours(0,0,0,0);
@@ -11840,29 +11871,140 @@ function obsGroupData(){
 }
 function obsEnsureDiscOptions(){const sel=document.getElementById('obsDisc');if(!sel)return;const current=sel.value;const names=[...new Set(activeSessions().map(s=>s.disciplina).filter(Boolean))].sort();sel.innerHTML='<option value="all">Todas as disciplinas</option>'+names.map(n=>`<option value="${discEsc(n)}">${discEsc(n)}</option>`).join('');if(names.includes(current))sel.value=current;}
 function refreshObservacao(){
-  if(!document.getElementById('page-observacao'))return; obsEnsureDiscOptions(); const sessions=obsGroupData(); const rows={}; const byDisc={}; let totalAc=0,totalEr=0,totalTime=0;
-  sessions.forEach(s=>{const ac=Number(s.acertos)||0,er=Number(s.erros)||0;totalAc+=ac;totalEr+=er;totalTime+=Number(s.tempo)||0;const key=(s.disciplina||'Sem disciplina')+'||'+(s.topico||'Geral');if(!rows[key])rows[key]={disc:s.disciplina||'Sem disciplina',top:s.topico||'Geral',ac:0,er:0,time:0,cats:{}};rows[key].ac+=ac;rows[key].er+=er;rows[key].time+=Number(s.tempo)||0;const cat=s.categoria||'Sem categoria';rows[key].cats[cat]=(rows[key].cats[cat]||0)+ac+er;const d=s.disciplina||'Sem disciplina';if(!byDisc[d])byDisc[d]={ac:0,er:0,time:0};byDisc[d].ac+=ac;byDisc[d].er+=er;byDisc[d].time+=Number(s.tempo)||0;});
+  const page=document.getElementById('page-observacao');
+  if(!page || !page.classList.contains('active')) return;
+  obsEnsureDiscOptions(); const sessions=obsGroupData(); const rows={}; const byDisc={}; let totalAc=0,totalEr=0,totalTime=0;
+  sessions.forEach(s=>{const ac=Number(s.acertos)||0,er=Number(s.erros)||0,tempo=Number(s.tempo)||0,pausa=Number(s.tempoPausa)||0;totalAc+=ac;totalEr+=er;totalTime+=tempo;const key=(s.disciplina||'Sem disciplina')+'||'+(s.topico||'Geral');if(!rows[key])rows[key]={disc:s.disciplina||'Sem disciplina',top:s.topico||'Geral',ac:0,er:0,time:0,pause:0,cats:{}};rows[key].ac+=ac;rows[key].er+=er;rows[key].time+=tempo;rows[key].pause+=pausa;const cat=s.categoria||'Sem categoria';rows[key].cats[cat]=(rows[key].cats[cat]||0)+ac+er;const d=s.disciplina||'Sem disciplina';if(!byDisc[d])byDisc[d]={ac:0,er:0,time:0,pause:0};byDisc[d].ac+=ac;byDisc[d].er+=er;byDisc[d].time+=tempo;byDisc[d].pause+=pausa;});
   const list=Object.values(rows).sort((a,b)=>(b.er/(b.ac+b.er||1))-(a.er/(a.ac+a.er||1))||b.er-a.er);const totalQ=totalAc+totalEr;const ranked=list.filter(x=>x.er>0);const worst=ranked[0];const most=[...list].sort((a,b)=>b.er-a.er)[0];const least=[...list].sort((a,b)=>a.time-b.time)[0];
   const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v};set('obsKpiErro',worst?Math.round(worst.er/(worst.ac+worst.er||1)*100)+'%':'0%');set('obsKpiErroSub',worst?worst.disc+' · '+worst.top:'Sem dados');set('obsKpiErros',most?most.er:0);set('obsKpiErrosSub',most?most.disc+' · '+most.top:'Nenhum tópico identificado');set('obsKpiTempo',least?fmtTime(least.time):'0h00min');set('obsKpiTempoSub',least?least.disc+' · menor tempo registrado':'Sem dados suficientes');set('obsKpiQuestoes',totalQ);set('obsKpiQuestoesSub',(totalQ?Math.round(totalAc/totalQ*100):0)+'% de acerto geral');
   obsRenderCharts(sessions,byDisc);obsRenderTree(list);obsRenderCategories(sessions);obsRenderTable(list);
 }
-function obsRenderCharts(sessions,byDisc){const c=obsChartColors();const dates=[...new Set(sessions.map(s=>s.date).filter(Boolean))].sort().slice(-14);const ac=dates.map(d=>sessions.filter(s=>s.date===d).reduce((n,s)=>n+(Number(s.acertos)||0),0));const er=dates.map(d=>sessions.filter(s=>s.date===d).reduce((n,s)=>n+(Number(s.erros)||0),0));const labels=dates.map(d=>{const x=new Date(d+'T12:00:00');return x.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'});});if(obsLineChart)obsLineChart.destroy();obsLineChart=new Chart(document.getElementById('obsLineChart'),{type:'line',data:{labels,datasets:[{label:'Acertos',data:ac,borderColor:'#0a2a66',backgroundColor:'rgba(10,42,102,.1)',fill:true,tension:.35},{label:'Erros',data:er,borderColor:'#e53e3e',backgroundColor:'rgba(229,62,62,.06)',fill:true,tension:.35}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:c.text,font:{family:'Nunito',size:11}}}},scales:{x:{ticks:{color:c.text},grid:{display:false}},y:{beginAtZero:true,ticks:{color:c.text,precision:0},grid:{color:c.grid}}}}});const names=Object.keys(byDisc).sort((a,b)=>byDisc[b].er-byDisc[a].er).slice(0,8);if(obsBarChart)obsBarChart.destroy();obsBarChart=new Chart(document.getElementById('obsBarChart'),{type:'bar',data:{labels:names.map(n=>n.length>17?n.slice(0,17)+'…':n),datasets:[{label:'Erros',data:names.map(n=>byDisc[n].er),backgroundColor:'#e53e3e',borderRadius:5},{label:'Acertos',data:names.map(n=>byDisc[n].ac),backgroundColor:'#0a2a66',borderRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:c.text,font:{family:'Nunito',size:10}}}},scales:{x:{ticks:{color:c.text,maxRotation:35},grid:{display:false}},y:{beginAtZero:true,ticks:{color:c.text,precision:0},grid:{color:c.grid}}}}});const cats={};sessions.forEach(s=>{const k=s.categoria||'Sem categoria';cats[k]=(cats[k]||0)+(Number(s.erros)||0)});const cn=Object.keys(cats),colors=['#e53e3e','#e2ad2d','#6d5bb5','#285bb5','#0a2a66','#f97316'];if(obsPieChart)obsPieChart.destroy();obsPieChart=new Chart(document.getElementById('obsPieChart'),{type:'pie',data:{labels:cn,datasets:[{data:cn.map(k=>cats[k]),backgroundColor:cn.map((_,i)=>colors[i%colors.length]),borderWidth:2,borderColor:getComputedStyle(document.documentElement).getPropertyValue('--card-bg')}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}}}});document.getElementById('obsPieLegend').innerHTML=cn.length?cn.map((k,i)=>`<span><i style="background:${colors[i%colors.length]}"></i>${discEsc(k)} (${cats[k]})</span>`).join(''):'<span>Sem erros registrados</span>';}
+function obsRenderCharts(sessions, byDisc) {
+  const lineCanvas = document.getElementById('obsLineChart');
+  const barCanvas = document.getElementById('obsBarChart');
+  const pieCanvas = document.getElementById('obsPieChart');
+  if (!lineCanvas || !barCanvas || !pieCanvas || typeof Chart === 'undefined') return;
+  const c = obsChartColors();
+  const destroy = chart => { if (chart) chart.destroy(); };
+  destroy(obsLineChart); destroy(obsBarChart); destroy(obsPieChart);
+  obsLineChart = obsBarChart = obsPieChart = null;
+
+  const dates = [...new Set(sessions.map(s => s.date).filter(Boolean))].sort().slice(-14);
+  const lineLabels = dates.length ? dates.map(d => new Date(d + 'T12:00:00').toLocaleDateString('pt-BR', {day:'2-digit', month:'2-digit'})) : ['Sem dados'];
+  const ac = dates.length ? dates.map(d => sessions.filter(s => s.date === d).reduce((n, s) => n + (Number(s.acertos) || 0), 0)) : [0];
+  const er = dates.length ? dates.map(d => sessions.filter(s => s.date === d).reduce((n, s) => n + (Number(s.erros) || 0), 0)) : [0];
+  obsLineChart = new Chart(lineCanvas, {
+    type: 'line',
+    data: { labels: lineLabels, datasets: [
+      { label:'Acertos', data:ac, borderColor:'#0a2a66', backgroundColor:'rgba(10,42,102,.1)', fill:true, tension:.35, pointRadius:3 },
+      { label:'Erros', data:er, borderColor:'#e53e3e', backgroundColor:'rgba(229,62,62,.06)', fill:true, tension:.35, pointRadius:3 }
+    ]},
+    options: { responsive:true, maintainAspectRatio:false, plugins:{legend:{labels:{color:c.text,font:{family:'Nunito',size:11}}}}, scales:{x:{ticks:{color:c.text},grid:{display:false}},y:{beginAtZero:true,ticks:{color:c.text,precision:0},grid:{color:c.grid}}} }
+  });
+
+  const names = Object.keys(byDisc).sort((a,b) => byDisc[b].er - byDisc[a].er).slice(0,8);
+  const barLabels = names.length ? names.map(n => n.length > 17 ? n.slice(0,17) + '…' : n) : ['Sem dados'];
+  const barEr = names.length ? names.map(n => byDisc[n].er) : [0];
+  const barAc = names.length ? names.map(n => byDisc[n].ac) : [0];
+  obsBarChart = new Chart(barCanvas, {
+    type:'bar',
+    data:{labels:barLabels,datasets:[{label:'Erros',data:barEr,backgroundColor:'#e53e3e',borderRadius:5},{label:'Acertos',data:barAc,backgroundColor:'#0a2a66',borderRadius:5}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:c.text,font:{family:'Nunito',size:10}}}},scales:{x:{ticks:{color:c.text,maxRotation:35},grid:{display:false}},y:{beginAtZero:true,ticks:{color:c.text,precision:0},grid:{color:c.grid}}}}
+  });
+
+  const cats = {};
+  sessions.forEach(s => { const k = s.categoria || 'Sem categoria'; cats[k] = (cats[k] || 0) + (Number(s.erros) || 0); });
+  const hasPieData = Object.keys(cats).length > 0 && Object.values(cats).some(v => v > 0);
+  const cn = hasPieData ? Object.keys(cats) : ['Sem erros'];
+  const colors = ['#e53e3e','#e2ad2d','#6d5bb5','#285bb5','#0a2a66','#f97316'];
+  const pieData = hasPieData ? cn.map(k => cats[k]) : [1];
+  obsPieChart = new Chart(pieCanvas, {
+    type:'pie', data:{labels:cn,datasets:[{data:pieData,backgroundColor:cn.map((_,i) => hasPieData ? colors[i%colors.length] : '#e2e8f0'),borderWidth:2,borderColor:getComputedStyle(document.documentElement).getPropertyValue('--card-bg').trim() || '#fff'}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}}}
+  });
+  const legend = document.getElementById('obsPieLegend');
+  if (legend) legend.innerHTML = hasPieData
+    ? cn.map((k,i) => `<span><i style="background:${colors[i%colors.length]}"></i>${discEsc(k)} (${cats[k]})</span>`).join('')
+    : '<span>Sem erros registrados</span>';
+}
 function obsRenderTree(list){const el=document.getElementById('obsTree');const top=list.filter(x=>x.er>0).slice(0,8);if(!top.length){el.innerHTML='<div class="obs-empty" style="width:100%">Nenhuma falha destacada ainda.</div>';return}const max=Math.max(...top.map(x=>x.er),1);el.innerHTML=top.map(x=>{const p=x.er/(x.ac+x.er||1);const col=p>=.8?'#e53e3e':p>=.6?'#e2ad2d':'#6d5bb5';return `<div class="obs-tree-item" style="flex:${Math.max(1,x.er/max)};background:${col}" title="${discEsc(x.disc)} · ${discEsc(x.top)}: ${x.er} erros"><span>${discEsc(x.top)}<br><small>${x.er} erros</small></span></div>`}).join('');}
 function obsRenderCategories(sessions){const el=document.getElementById('obsCategorySummary');const data={};sessions.forEach(s=>{const k=s.categoria||'Sem categoria';data[k]=(data[k]||0)+(Number(s.erros)||0)});const max=Math.max(...Object.values(data),1);el.innerHTML=Object.keys(data).length?Object.entries(data).sort((a,b)=>b[1]-a[1]).map(([k,v],i)=>`<div class="obs-category-row"><span>${discEsc(k)}</span><div class="obs-cat-bar"><div class="obs-cat-fill" style="width:${Math.round(v/max*100)}%;background:${['#e53e3e','#e2ad2d','#6d5bb5','#0a2a66'][i%4]}"></div></div><b>${v}</b></div>`).join(''):'<div class="obs-empty">Sem categorias registradas.</div>';}
-function obsRenderTable(list){const body=document.getElementById('obsTableBody');setObsCount=list.length;document.getElementById('obsTableCount').textContent=list.length+' item'+(list.length===1?'':'s');if(!list.length){body.innerHTML='<tr><td colspan="8"><div class="obs-empty"><strong>Sem registros para analisar</strong>Adicione estudos ou ajuste os filtros.</div></td></tr>';return}body.innerHTML=list.map(x=>{const q=x.ac+x.er,pct=q?Math.round(x.er/q*100):0;const label=pct>=80?'Alta':pct>=50?'Média':'Baixa',col=pct>=80?'#e53e3e':pct>=50?'#e2ad2d':'#6d5bb5';return `<tr><td title="${discEsc(x.disc+' · '+x.top)}"><b>${discEsc(x.disc)}</b><br><span style="color:var(--text-gray);font-size:11px">${discEsc(x.top)}</span></td><td>${Object.keys(x.cats).join(', ')}</td><td>${q}</td><td class="obs-ac">${x.ac}</td><td class="obs-err">${x.er}</td><td style="color:${col}">${pct}%</td><td>${fmtTime(x.time)}</td><td><span class="obs-priority" style="background:${col}">${label}</span></td></tr>`}).join('');}
+function obsRenderTable(list){const body=document.getElementById('obsTableBody');if(!body)return;document.getElementById('obsTableCount').textContent=list.length+' item'+(list.length===1?'':'s');if(!list.length){body.innerHTML='<tr><td colspan="9"><div class="obs-empty"><strong>Sem registros para analisar</strong>Adicione estudos ou ajuste os filtros.</div></td></tr>';return}body.innerHTML=list.map(x=>{const q=x.ac+x.er,pct=q?Math.round(x.er/q*100):0;const label=pct>=80?'Alta':pct>=50?'Média':'Baixa',col=pct>=80?'#e53e3e':pct>=50?'#e2ad2d':'#6d5bb5';return `<tr><td title="${discEsc(x.disc+' · '+x.top)}"><b>${discEsc(x.disc)}</b><br><span style="color:var(--text-gray);font-size:11px">${discEsc(x.top)}</span></td><td>${Object.keys(x.cats).join(', ')}</td><td>${q}</td><td class="obs-ac">${x.ac}</td><td class="obs-err">${x.er}</td><td style="color:${col}">${pct}%</td><td>${fmtTime(x.time)}</td><td>${fmtTime(x.pause||0)}</td><td><span class="obs-priority" style="background:${col}">${label}</span></td></tr>`}).join('');}
 
 /* ===== LÓGICA DAS NOVAS ÁREAS ===== */
-let comparisonBar=null,comparisonLine=null;
+var comparisonBar=null,comparisonLine=null;
 function obsPeriodSessions(days,offset=0){const all=activeSessions();if(!days)return all;const end=new Date();end.setHours(0,0,0,0);end.setDate(end.getDate()-offset*days);const start=new Date(end);start.setDate(end.getDate()-days+1);return all.filter(s=>{const d=new Date((s.date||'')+'T12:00:00');return d>=start&&d<=end;});}
 function smartRows(){const map={};const now=new Date();activeSessions().forEach(s=>{if(!(Number(s.erros)||0))return;const k=(s.disciplina||'Sem disciplina')+'||'+(s.topico||'Geral');if(!map[k])map[k]={disc:s.disciplina||'Sem disciplina',top:s.topico||'Geral',er:0,ac:0,time:0,last:null};map[k].er+=Number(s.erros)||0;map[k].ac+=Number(s.acertos)||0;map[k].time+=Number(s.tempo)||0;if(!map[k].last||s.date>map[k].last)map[k].last=s.date;});return Object.values(map).map(x=>{const age=x.last?Math.max(0,Math.floor((now-new Date(x.last+'T12:00:00'))/86400000)):30;const rate=x.er/(x.er+x.ac||1);x.score=Math.round(rate*60+Math.min(age,30)/30*25+(x.time<1800?15:0));return x}).sort((a,b)=>b.score-a.score);}
 function renderSmartRevisions(){const list=document.getElementById('smartRevisionList');if(!list)return;const rows=smartRows().slice(0,6);document.getElementById('smartRevisionCount').textContent=rows.length+' prioridade'+(rows.length===1?'':'s');list.innerHTML=rows.length?rows.map(x=>`<div class="smart-revision-item"><div class="smart-revision-name">${discEsc(x.disc)}</div><div class="smart-revision-meta">${discEsc(x.top)} · ${x.er} erros · ${Math.round(x.er/(x.er+x.ac||1)*100)}% de erro</div><button class="smart-revision-btn" onclick="openSmartRevision('${discEsc(x.disc)}','${discEsc(x.top)}')">Revisar agora</button></div>`).join(''):'<div class="smart-revision-empty">Nenhuma prioridade identificada. Continue registrando seus estudos para gerar recomendações.</div>';}
 function renderErrorBook(){const sel=document.getElementById('errorBookDisc');if(!sel)return;const current=sel.value;const names=[...new Set(activeSessions().map(s=>s.disciplina).filter(Boolean))].sort();sel.innerHTML='<option value="all">Todas as disciplinas</option>'+names.map(n=>`<option value="${discEsc(n)}">${discEsc(n)}</option>`).join('');if(names.includes(current))sel.value=current;const filter=sel.value;const sort=document.getElementById('errorBookSort').value;const map={};activeSessions().filter(s=>filter==='all'||s.disciplina===filter).forEach(s=>{const er=Number(s.erros)||0;if(!er)return;const k=(s.disciplina||'Sem disciplina')+'||'+(s.topico||'Geral');if(!map[k])map[k]={disc:s.disciplina||'Sem disciplina',top:s.topico||'Geral',er:0,ac:0,time:0,comments:[],last:s.date};map[k].er+=er;map[k].ac+=Number(s.acertos)||0;map[k].time+=Number(s.tempo)||0;if(s.comentarios)map[k].comments.push(s.comentarios);if(s.date>map[k].last)map[k].last=s.date;});let rows=Object.values(map);rows.sort(sort==='recent'?(a,b)=>b.last.localeCompare(a.last):sort==='errors'?(a,b)=>b.er-a.er:(a,b)=>b.er/(b.er+b.ac||1)-a.er/(a.er+a.ac||1));document.getElementById('errorBookCount').textContent=rows.length+' erro'+(rows.length===1?'':'s')+' identificados';const list=document.getElementById('errorBookList');list.innerHTML=rows.length?rows.map(x=>`<div class="error-book-card"><div class="error-book-main"><div><div class="error-book-title">${discEsc(x.disc)}</div><div class="error-book-topic">${discEsc(x.top)} · último registro: ${x.last?new Date(x.last+'T12:00:00').toLocaleDateString('pt-BR'):'—'}</div></div><div class="error-book-stat"><b>${x.er}</b><span>Erros</span></div><div class="error-book-stat"><b style="color:${x.er/(x.er+x.ac||1)>=.6?'var(--red)':'#e2ad2d'}">${Math.round(x.er/(x.er+x.ac||1)*100)}%</b><span>Taxa de erro</span></div></div>${x.comments.length?`<div class="error-book-comment"><b>Observações:</b> ${discEsc(x.comments.join(' · '))}</div>`:''}</div>`).join(''):'<div class="obs-empty"><strong>Nenhum erro registrado</strong>Os erros informados no Adicionar Estudo aparecerão aqui automaticamente.</div>';}
-function renderComparison(){const days=Number(document.getElementById('comparisonPeriod')?.value||7);const cur=obsPeriodSessions(days,0),prev=obsPeriodSessions(days,1);const sum=a=>({q:a.reduce((n,s)=>n+(Number(s.acertos)||0)+(Number(s.erros)||0),0),ac:a.reduce((n,s)=>n+(Number(s.acertos)||0),0),er:a.reduce((n,s)=>n+(Number(s.erros)||0),0),time:a.reduce((n,s)=>n+(Number(s.tempo)||0),0)});const a=sum(cur),b=sum(prev),pct=x=>x.q?Math.round(x.ac/x.q*100):0,delta=(x,y)=>{const d=x-y;return (d>0?'+':'')+d+'%'};const k=[['Questões',a.q,b.q,a.q-b.q],['Desempenho',pct(a),pct(b),delta(pct(a),pct(b))],['Erros',a.er,b.er,a.er-b.er],['Tempo estudado',fmtTime(a.time),fmtTime(b.time),a.time-b.time>0?'+'+fmtTime(a.time-b.time):'-'+fmtTime(b.time-a.time)]];document.getElementById('comparisonKpis').innerHTML=k.map(x=>`<div class="comparison-kpi"><div class="comparison-kpi-label">${x[0]}</div><div class="comparison-kpi-value">${x[1]}</div><div class="comparison-kpi-change" style="color:${typeof x[3]==='number'&&x[3]<0?'var(--red)':'var(--green)'}">Atual: ${x[1]} · Anterior: ${x[2]} · ${x[3]}</div></div>`).join('');const labels=['Atual','Anterior'];const cc=obsChartColors();if(comparisonBar)comparisonBar.destroy();comparisonBar=new Chart(document.getElementById('comparisonBar'),{type:'bar',data:{labels,datasets:[{label:'Acertos',data:[a.ac,b.ac],backgroundColor:'#0a2a66',borderRadius:5},{label:'Erros',data:[a.er,b.er],backgroundColor:'#e53e3e',borderRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:cc.text}}},scales:{x:{ticks:{color:cc.text},grid:{display:false}},y:{beginAtZero:true,ticks:{color:cc.text,precision:0},grid:{color:cc.grid}}}}});const all=[...cur,...prev];const dates=[...new Set(all.map(s=>s.date).filter(Boolean))].sort();if(comparisonLine)comparisonLine.destroy();comparisonLine=new Chart(document.getElementById('comparisonLine'),{type:'line',data:{labels:dates.map(d=>new Date(d+'T12:00:00').toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'})),datasets:[{label:'% de acerto',data:dates.map(d=>{const z=all.filter(s=>s.date===d),q=z.reduce((n,s)=>n+(Number(s.acertos)||0)+(Number(s.erros)||0),0),ac=z.reduce((n,s)=>n+(Number(s.acertos)||0),0);return q?Math.round(ac/q*100):0}),borderColor:'#6d5bb5',tension:.35}]},options:{responsive:true,maintainAspectRatio:false,scales:{x:{ticks:{color:cc.text},grid:{display:false}},y:{min:0,max:100,ticks:{color:cc.text,callback:v=>v+'%'},grid:{color:cc.grid}}},plugins:{legend:{labels:{color:cc.text}}}}});const by={};[...new Set([...cur.map(s=>s.disciplina),...prev.map(s=>s.disciplina)])].filter(Boolean).forEach(d=>{const f=a=>a.filter(s=>s.disciplina===d),u=sum(f(cur)),v=sum(f(prev));by[d]={u,v}});document.getElementById('comparisonTableBody').innerHTML=Object.entries(by).sort((x,y)=>y[1].u.er-x[1].u.er).map(([d,x])=>{const up=pct(x[1].u),vp=pct(x[1].v),v=up-vp;return `<tr><td style="text-align:left;font-weight:800">${discEsc(d)}</td><td>${x[1].u.q}</td><td style="color:${up>=70?'var(--green)':'var(--red)'}">${up}%</td><td>${x[1].v.q}</td><td>${vp}%</td><td style="color:${v>=0?'var(--green)':'var(--red)'}">${v>0?'+':''}${v}%</td><td>${fmtTime(x[1].u.time)}</td></tr>`}).join('')||'<tr><td colspan="7" class="obs-empty">Sem dados para comparar.</td></tr>';}
+function renderComparison() {
+  const page = document.getElementById('page-comparacao');
+  if (!page || !page.classList.contains('active')) return;
+  const barCanvas = document.getElementById('comparisonBar');
+  const lineCanvas = document.getElementById('comparisonLine');
+  if (!barCanvas || !lineCanvas || typeof Chart === 'undefined') return;
+
+  const days = Number(document.getElementById('comparisonPeriod')?.value || 7);
+  const cur = obsPeriodSessions(days, 0), prev = obsPeriodSessions(days, 1);
+  const sum = list => ({
+    q: list.reduce((n,s) => n + (Number(s.acertos)||0) + (Number(s.erros)||0), 0),
+    ac: list.reduce((n,s) => n + (Number(s.acertos)||0), 0),
+    er: list.reduce((n,s) => n + (Number(s.erros)||0), 0),
+    time: list.reduce((n,s) => n + sessionTempo(s), 0)
+  });
+  const a = sum(cur), b = sum(prev);
+  const pct = x => x.q ? Math.round(x.ac / x.q * 100) : 0;
+  const signed = value => value > 0 ? '+' + value : String(value);
+  const k = [
+    ['Questões', a.q, b.q, signed(a.q - b.q)],
+    ['Desempenho', pct(a) + '%', pct(b) + '%', signed(pct(a) - pct(b)) + '%'],
+    ['Erros', a.er, b.er, signed(a.er - b.er)],
+    ['Tempo estudado', fmtTime(a.time), fmtTime(b.time), a.time >= b.time ? '+' + fmtTime(a.time - b.time) : '-' + fmtTime(b.time - a.time)]
+  ];
+  const kpi = document.getElementById('comparisonKpis');
+  if (kpi) kpi.innerHTML = k.map(x => `<div class="comparison-kpi"><div class="comparison-kpi-label">${x[0]}</div><div class="comparison-kpi-value">${x[1]}</div><div class="comparison-kpi-change">Atual: ${x[1]} · Anterior: ${x[2]} · ${x[3]}</div></div>`).join('');
+
+  const cc = obsChartColors();
+  if (comparisonBar) comparisonBar.destroy();
+  comparisonBar = new Chart(barCanvas, {
+    type:'bar', data:{labels:['Atual','Anterior'],datasets:[{label:'Acertos',data:[a.ac,b.ac],backgroundColor:'#0a2a66',borderRadius:5},{label:'Erros',data:[a.er,b.er],backgroundColor:'#e53e3e',borderRadius:5}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:cc.text}}},scales:{x:{ticks:{color:cc.text},grid:{display:false}},y:{beginAtZero:true,ticks:{color:cc.text,precision:0},grid:{color:cc.grid}}}}
+  });
+
+  const all = [...cur, ...prev];
+  const dates = [...new Set(all.map(s => s.date).filter(Boolean))].sort();
+  const lineLabels = dates.length ? dates.map(d => new Date(d+'T12:00:00').toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'})) : ['Sem dados'];
+  const lineData = dates.length ? dates.map(d => {
+    const z = all.filter(s => s.date === d);
+    const q = z.reduce((n,s) => n + (Number(s.acertos)||0) + (Number(s.erros)||0), 0);
+    const ac = z.reduce((n,s) => n + (Number(s.acertos)||0), 0);
+    return q ? Math.round(ac / q * 100) : 0;
+  }) : [0];
+  if (comparisonLine) comparisonLine.destroy();
+  comparisonLine = new Chart(lineCanvas, {
+    type:'line', data:{labels:lineLabels,datasets:[{label:'% de acerto',data:lineData,borderColor:'#6d5bb5',backgroundColor:'rgba(109,91,181,.08)',fill:true,tension:.35,pointRadius:3}]},
+    options:{responsive:true,maintainAspectRatio:false,scales:{x:{ticks:{color:cc.text},grid:{display:false}},y:{min:0,max:100,ticks:{color:cc.text,callback:v=>v+'%'},grid:{color:cc.grid}}},plugins:{legend:{labels:{color:cc.text}}}}
+  });
+
+  const by = {};
+  [...new Set([...cur.map(s => s.disciplina), ...prev.map(s => s.disciplina)])].filter(Boolean).forEach(d => {
+    const current = sum(cur.filter(s => s.disciplina === d));
+    const previous = sum(prev.filter(s => s.disciplina === d));
+    by[d] = { u: current, v: previous };
+  });
+  const table = document.getElementById('comparisonTableBody');
+  if (table) table.innerHTML = Object.entries(by).sort((x,y) => y[1].u.er - x[1].u.er).map(([d,x]) => {
+    const up = pct(x.u), vp = pct(x.v), variation = up - vp;
+    return `<tr><td style="text-align:left;font-weight:800">${discEsc(d)}</td><td>${x.u.q}</td><td style="color:${up>=70?'var(--green)':'var(--red)'}">${up}%</td><td>${x.v.q}</td><td>${vp}%</td><td style="color:${variation>=0?'var(--green)':'var(--red)'}">${variation>0?'+':''}${variation}%</td><td>${fmtTime(x.u.time)}</td></tr>`;
+  }).join('') || '<tr><td colspan="7" class="obs-empty">Sem dados para comparar.</td></tr>';
+}
 
 /* ===== CORREÇÕES DE FLUXOS E PERSISTÊNCIA ===== */
-let homeWeekOffset=0, homeChartMode='tempo', homeDonutMode='hoje';
 function toggleHistPlanoDropdown(){navigateTo('planos',document.querySelector('.nav-item[onclick*="planos"]'));}
-function changeHomeWeek(dir){homeWeekOffset=Math.min(0,homeWeekOffset+dir);refreshWeeklyChart();const e=document.querySelector('.card-nav span');if(e){const d=new Date();d.setDate(d.getDate()+homeWeekOffset*7);const end=new Date(d);end.setDate(d.getDate()+6);e.textContent=d.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'})+' ~ '+end.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'});}}
+function changeHomeWeek(dir) {
+  homeWeekOffset = Math.min(0, homeWeekOffset + dir);
+  refreshWeeklyChart();
+}
 function toggleTimerExpand(){const modal=document.querySelector('.timer-modal');if(modal){modal.classList.toggle('timer-expanded');modal.style.width=modal.classList.contains('timer-expanded')?'min(760px,96vw)':'';}}
 function saveProfileSettings(){const vals={nome:document.querySelector('#tab-info input:nth-of-type(1)')?.value||'',sobrenome:document.querySelector('#tab-info input:nth-of-type(2)')?.value||'',username:document.querySelector('#tab-info input:nth-of-type(3)')?.value||'',email:document.querySelector('#tab-info input[type=email]')?.value||'',perfV1:document.getElementById('perfV1')?.value||65,perfV2:document.getElementById('perfV2')?.value||75};localStorage.setItem('focoNaFardaProfile',JSON.stringify(vals));if(typeof updatePerfBar==='function')updatePerfBar();showToast('✅ Configurações salvas!');}
 function openSmartRevision(disc,top){openRegistro();setTimeout(()=>{const ds=document.getElementById('regDisciplinaSelect');if(ds){const opt=[...ds.options].find(o=>o.text===disc);if(opt){ds.value=opt.value;onRegDisciplinaChange();setTimeout(()=>{const ts=document.getElementById('regTopicoSelect');const to=[...ts.options].find(o=>o.text===top);if(to)ts.value=to.value;},30)}}const cat=document.getElementById('regCategoria');if(cat){const o=[...cat.options].find(o=>/revis/i.test(o.text));if(o)cat.value=o.value;}},80);}
